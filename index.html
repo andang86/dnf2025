@@ -78,14 +78,14 @@
             padding: 20px;
         }
 
-        /* 글씨 크기 조절 버튼 스타일 */
-        .font-controls {
+        /* 글씨 크기 조절 및 인쇄 버튼 스타일 */
+        .controls {
             text-align: right;
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border-gray);
         }
-        .font-controls button {
+        .controls button {
             background-color: #fff;
             border: 1px solid var(--border-gray);
             padding: 6px 12px;
@@ -96,9 +96,18 @@
             margin-left: 5px;
             transition: background-color 0.2s;
         }
-        .font-controls button:hover {
+        .controls button:hover {
             background-color: #f1f1f1;
         }
+        #print-button {
+            background-color: var(--main-blue);
+            color: white;
+            border-color: var(--main-blue);
+        }
+        #print-button:hover {
+            background-color: #357ebd;
+        }
+
 
         /* 섹션 공통 스타일 */
         section {
@@ -207,18 +216,80 @@
 
         /* 푸터 */
         footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             text-align: center;
             padding: 20px;
             background-color: var(--dark-gray);
             color: #fff;
         }
-        footer p { margin: 0; font-weight: 700; }
+        .footer-logo {
+            height: 40px;
+            width: auto;
+        }
+        footer p { 
+            margin: 0; 
+            font-weight: 700;
+            font-size: 0.9em;
+        }
         
         /* 반응형 디자인 (PC 등 넓은 화면) */
         @media (min-width: 768px) {
             header h1 { font-size: 3.2em; }
             main { padding: 40px; }
             .justification-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* 인쇄 전용 스타일 */
+        @media print {
+            /* 인쇄 시 불필요한 요소 숨기기 */
+            header, footer, .controls {
+                display: none;
+            }
+
+            body {
+                font-size: 12pt; /* A4 인쇄에 적합한 폰트 크기 */
+                background-color: #fff;
+                color: #000;
+            }
+
+            .container {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
+                border-radius: 0;
+            }
+            
+            main {
+                padding: 0;
+            }
+
+            section {
+                margin-bottom: 20px;
+            }
+
+            .evidence-card, .claim, .truth li, .justification-card {
+                background-color: #fff !important;
+                border: 1px solid #ccc;
+            }
+
+            .chart-container {
+                page-break-inside: avoid; /* 차트가 페이지 중간에 잘리지 않도록 함 */
+            }
+
+            /* 2페이지로 나누기 위한 페이지 나눔 지점 */
+            #evidence .evidence-card:nth-of-type(2) {
+                page-break-after: always;
+            }
+
+            .call-to-action {
+                background: #eee !important;
+                color: #000 !important;
+                border: 2px solid #000;
+            }
         }
     </style>
 </head>
@@ -227,14 +298,15 @@
     <div class="container">
         <header>
             <p class="flyer-title">2025 솔브레인디엔에프지회 임금투쟁 선전물 1호</p>
-            <h1>임금협상 최종결렬!!!<br>왜 우리의 실질임금은 하락하는가?</h1>
+            <h1>회사는 역대 최고 이익,<br>왜 우리의 실질임금은 하락하는가?</h1>
             <p class="subtitle">6.2% 임금 인상 요구는 ‘과욕’이 아닌 ‘정상화’입니다</p>
         </header>
 
         <main id="main-content">
-            <div class="font-controls">
+            <div class="controls">
                 <button id="font-decrease" title="글씨 작게">-</button>
                 <button id="font-increase" title="글씨 크게">+</button>
+                <button id="print-button" title="인쇄하기">&#128424; 인쇄하기</button>
             </div>
 
             <section id="rebuttal">
@@ -246,8 +318,9 @@
                 <div class="truth">
                     <h2>[진실] 돈이 없는 게 아니라, 노동자에게 줄 돈만 없을 뿐입니다.</h2>
                     <ul>
-                        <li><strong>주주 배려:</strong>2024년 말 20억 원의 자사주를 매입했고, 영업손실이 발생한 2023년과 2024년에도 수십억 원의 현금배당을 멈추지 않았습니다.</li>
+                        <li><strong>주주 배당 및 자사주 매입:</strong> 2024년 말 <strong>20억 원</strong>의 자사주를 매입했고, <strong>영업손실이 발생한 2023년과 2024년에도 수십억 원의 현금배당을 멈추지 않았습니다.</strong></li>
                         <li><strong>공격적 투자:</strong> 미래를 위한 설비와 연구개발(R&D) 투자에는 수백억을 집행했습니다.</li>
+                        <li><strong>명백한 비교:</strong> 회사가 주주들을 위해 사용한 돈은 우리가 요구하는 6.2% 임금 인상에 필요한 총액(약 10~12억 원 추산)을 훨씬 뛰어넘는 금액입니다.</li>
                         <li><strong>결론:</strong> 투자와 주주환원에는 쓸 돈이 있으면서, 성과를 만든 노동자의 임금만 올릴 여력이 없다는 것은 명백한 기만입니다.</li>
                     </ul>
                 </div>
@@ -276,7 +349,7 @@
             </section>
 
             <section id="justification">
-                <h2>6.2% 요구는 ‘과욕’이 아니라 ‘정상화’입니다!</h2>
+                <h2>우리의 6.2% 요구는 ‘과욕’이 아니라 ‘정상화’입니다!</h2>
                 <div class="justification-grid">
                     <div class="justification-card">
                         <h3>실질임금 보전</h3>
@@ -300,26 +373,24 @@
         </main>
 
         <footer>
+            <img src="https://i.imgur.com/2YqfW2H.png" alt="화섬식품노조 로고" class="footer-logo">
             <p>전국화학섬유식품산업노동조합 솔브레인디엔에프지회</p>
         </footer>
     </div>
 
     <script>
-        // 글씨 크기 조절 스크립트
         document.addEventListener('DOMContentLoaded', () => {
+            // 글씨 크기 조절 스크립트
             const increaseBtn = document.getElementById('font-increase');
             const decreaseBtn = document.getElementById('font-decrease');
-            const content = document.getElementById('main-content');
+            const printBtn = document.getElementById('print-button');
 
-            // 최소/최대 글씨 크기 (px 단위)
             const MIN_FONT_SIZE = 14;
             const MAX_FONT_SIZE = 22;
 
             function changeFontSize(amount) {
-                // 현재 body의 글씨 크기를 기준으로 계산
                 let currentSize = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'));
                 let newSize = currentSize + amount;
-
                 if (newSize >= MIN_FONT_SIZE && newSize <= MAX_FONT_SIZE) {
                     document.body.style.fontSize = newSize + 'px';
                 }
@@ -327,111 +398,109 @@
 
             increaseBtn.addEventListener('click', () => changeFontSize(1));
             decreaseBtn.addEventListener('click', () => changeFontSize(-1));
-        });
+            printBtn.addEventListener('click', () => window.print());
 
-        // 차트 데이터 정의
-        const years = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
-        const dnfRates = [2.0, 2.0, 2.0, 1.5, 2.2, 3.0, 1.0, 1.0];
-        const industryRates = [3.8, 3.8, 3.8, 2.6, 4.3, 5.1, 4.5, 4.4];
-        const cpiRates = [1.9, 1.5, 0.4, 0.5, 2.5, 5.1, 3.6, 2.3];
-        const realRates = dnfRates.map((rate, index) => (rate - cpiRates[index]).toFixed(1));
+            // 차트 데이터 정의
+            const years = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+            const dnfRates = [2.0, 2.0, 2.0, 1.5, 2.2, 3.0, 1.0, 1.0];
+            const industryRates = [3.8, 3.8, 3.8, 2.6, 4.3, 5.1, 4.5, 4.4];
+            const cpiRates = [1.9, 1.5, 0.4, 0.5, 2.5, 5.1, 3.6, 2.3];
+            const realRates = dnfRates.map((rate, index) => (rate - cpiRates[index]).toFixed(1));
 
-        // 1. DNF vs 제조업 평균 임금 인상률 비교 차트
-        const wageCtx = document.getElementById('wageChart').getContext('2d');
-        new Chart(wageCtx, {
-            type: 'line',
-            data: {
-                labels: years,
-                datasets: [{
-                    label: 'DNF 임금인상률 (%)',
-                    data: dnfRates,
-                    borderColor: 'rgba(217, 83, 79, 1)',
-                    backgroundColor: 'rgba(217, 83, 79, 0.1)',
-                    borderWidth: 3,
-                    tension: 0.1,
-                    pointRadius: 5,
-                    pointBackgroundColor: 'rgba(217, 83, 79, 1)'
-                }, {
-                    label: '제조업 협약임금상승률 (%)',
-                    data: industryRates,
-                    borderColor: 'rgba(92, 184, 92, 1)',
-                    backgroundColor: 'rgba(92, 184, 92, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.1,
-                    pointRadius: 5,
-                    pointBackgroundColor: 'rgba(92, 184, 92, 1)'
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    title: { display: true, text: 'DNF vs 제조업 평균 임금 인상률 추이', font: { size: 16, weight: 'bold' } },
-                    tooltip: { mode: 'index', intersect: false },
+            // 1. DNF vs 제조업 평균 임금 인상률 비교 차트
+            const wageCtx = document.getElementById('wageChart').getContext('2d');
+            new Chart(wageCtx, {
+                type: 'line',
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: 'DNF 임금인상률 (%)',
+                        data: dnfRates,
+                        borderColor: 'rgba(217, 83, 79, 1)',
+                        backgroundColor: 'rgba(217, 83, 79, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.1,
+                        pointRadius: 5,
+                        pointBackgroundColor: 'rgba(217, 83, 79, 1)'
+                    }, {
+                        label: '제조업 협약임금상승률 (%)',
+                        data: industryRates,
+                        borderColor: 'rgba(92, 184, 92, 1)',
+                        backgroundColor: 'rgba(92, 184, 92, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.1,
+                        pointRadius: 5,
+                        pointBackgroundColor: 'rgba(92, 184, 92, 1)'
+                    }]
                 },
-                scales: {
-                    y: { beginAtZero: true, title: { display: true, text: '인상률 (%)' } },
-                    x: { title: { display: true, text: '연도' } }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: { display: true, text: 'DNF vs 제조업 평균 임금 인상률 추이', font: { size: 16, weight: 'bold' } },
+                        tooltip: { mode: 'index', intersect: false },
+                    },
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: '인상률 (%)' } },
+                        x: { title: { display: true, text: '연도' } }
+                    }
                 }
-            }
-        });
+            });
 
-        // 2. 실질임금상승률 차트
-        const realWageCtx = document.getElementById('realWageChart').getContext('2d');
-        new Chart(realWageCtx, {
-            type: 'bar', // 차트 종류: 막대 차트
-            data: {
-                labels: years,
-                datasets: [{
-                    label: 'DNF 명목임금인상률 (%)',
-                    data: dnfRates,
-                    borderColor: 'rgba(217, 83, 79, 1)',
-                    backgroundColor: 'rgba(217, 83, 79, 0.7)',
-                    type: 'line', // 혼합 차트: 이 데이터셋만 라인으로 표시
-                    order: 1 // 라인 차트를 위로 올림
-                }, {
-                    label: '소비자물가상승률 (%)',
-                    data: cpiRates,
-                    borderColor: 'rgba(240, 173, 78, 1)',
-                    backgroundColor: 'rgba(240, 173, 78, 0.7)',
-                    type: 'line',
-                    order: 2
-                }, {
-                    label: 'DNF 실질임금상승률 (%)',
-                    data: realRates,
-                    backgroundColor: (context) => {
-                        const value = context.raw;
-                        return value >= 0 ? 'rgba(66, 139, 202, 0.7)' : 'rgba(217, 83, 79, 0.7)';
-                    },
-                    borderColor: (context) => {
-                        const value = context.raw;
-                        return value >= 0 ? 'rgba(66, 139, 202, 1)' : 'rgba(217, 83, 79, 1)';
-                    },
-                    borderWidth: 1,
-                    order: 3
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    title: { display: true, text: 'DNF 실질임금상승률 추이 (명목임금 - 물가)', font: { size: 16, weight: 'bold' } },
-                    tooltip: { mode: 'index', intersect: false },
+            // 2. 실질임금상승률 차트
+            const realWageCtx = document.getElementById('realWageChart').getContext('2d');
+            new Chart(realWageCtx, {
+                type: 'bar', // 차트 종류: 막대 차트
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: 'DNF 명목임금인상률 (%)',
+                        data: dnfRates,
+                        borderColor: 'rgba(217, 83, 79, 1)',
+                        backgroundColor: 'rgba(217, 83, 79, 0.7)',
+                        type: 'line', // 혼합 차트: 이 데이터셋만 라인으로 표시
+                        order: 1 // 라인 차트를 위로 올림
+                    }, {
+                        label: '소비자물가상승률 (%)',
+                        data: cpiRates,
+                        borderColor: 'rgba(240, 173, 78, 1)',
+                        backgroundColor: 'rgba(240, 173, 78, 0.7)',
+                        type: 'line',
+                        order: 2
+                    }, {
+                        label: 'DNF 실질임금상승률 (%)',
+                        data: realRates,
+                        backgroundColor: (context) => {
+                            const value = context.raw;
+                            return value >= 0 ? 'rgba(66, 139, 202, 0.7)' : 'rgba(217, 83, 79, 0.7)';
+                        },
+                        borderColor: (context) => {
+                            const value = context.raw;
+                            return value >= 0 ? 'rgba(66, 139, 202, 1)' : 'rgba(217, 83, 79, 1)';
+                        },
+                        borderWidth: 1,
+                        order: 3
+                    }]
                 },
-                scales: {
-                    y: {
-                        title: { display: true, text: '상승률 (%)' },
-                        // 0% 기준선을 잘 보이게 하는 설정
-                        grid: {
-                            color: (context) => context.tick.value === 0 ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)',
-                            lineWidth: (context) => context.tick.value === 0 ? 2 : 1,
-                        }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: { display: true, text: 'DNF 실질임금상승률 추이 (명목임금 - 물가)', font: { size: 16, weight: 'bold' } },
+                        tooltip: { mode: 'index', intersect: false },
                     },
-                    x: { title: { display: true, text: '연도' } }
+                    scales: {
+                        y: {
+                            title: { display: true, text: '상승률 (%)' },
+                            // 0% 기준선을 잘 보이게 하는 설정
+                            grid: {
+                                color: (context) => context.tick.value === 0 ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)',
+                                lineWidth: (context) => context.tick.value === 0 ? 2 : 1,
+                            }
+                        },
+                        x: { title: { display: true, text: '연도' } }
+                    }
                 }
-            }
+            });
         });
     </script>
 </body>
 </html>
-
-
-
