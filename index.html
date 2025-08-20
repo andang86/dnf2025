@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리의 땀, 정당한 대가를 요구한다! - DNF 성과분배 쟁취 투쟁</title>
+    <title>2025 솔브레인디엔에프지회 임금투쟁 선전물 1호</title>
     <!-- Google Fonts Noto Sans KR 로드 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <!-- Chart.js 라이브러리 로드 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,7 +27,9 @@
             padding: 0;
             background-color: var(--light-gray);
             color: var(--dark-gray);
-            line-height: 1.7;
+            /* 기본 글씨 크기를 키워 가독성 향상 */
+            font-size: 17px;
+            line-height: 1.8;
         }
 
         /* 전체 레이아웃 컨테이너 */
@@ -47,6 +49,17 @@
             background-color: var(--dark-gray);
             color: #fff;
         }
+        /* 추가된 선전물 제목 스타일 */
+        .flyer-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #fff;
+            background-color: var(--main-red);
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
         header h1 {
             font-size: 2.5em;
             color: #fff;
@@ -54,7 +67,7 @@
             font-weight: 900;
             word-break: keep-all; /* 단어 단위 줄바꿈 */
         }
-        header p {
+        header p.subtitle {
             font-size: 1.2em;
             margin-top: 10px;
             font-weight: 700;
@@ -63,6 +76,28 @@
 
         main {
             padding: 20px;
+        }
+
+        /* 글씨 크기 조절 버튼 스타일 */
+        .font-controls {
+            text-align: right;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        .font-controls button {
+            background-color: #fff;
+            border: 1px solid var(--border-gray);
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: background-color 0.2s;
+        }
+        .font-controls button:hover {
+            background-color: #f1f1f1;
         }
 
         /* 섹션 공통 스타일 */
@@ -191,11 +226,17 @@
 
     <div class="container">
         <header>
+            <p class="flyer-title">2025 솔브레인디엔에프지회 임금투쟁 선전물 1호</p>
             <h1>회사는 역대 최고 이익,<br>왜 우리의 실질임금은 하락하는가?</h1>
-            <p>6.2% 임금 인상 요구는 ‘과욕’이 아닌 ‘정상화’입니다</p>
+            <p class="subtitle">6.2% 임금 인상 요구는 ‘과욕’이 아닌 ‘정상화’입니다</p>
         </header>
 
-        <main>
+        <main id="main-content">
+            <div class="font-controls">
+                <button id="font-decrease" title="글씨 작게">-</button>
+                <button id="font-increase" title="글씨 크게">+</button>
+            </div>
+
             <section id="rebuttal">
                 <div class="claim">
                     <h3>회사의 주장</h3>
@@ -235,7 +276,7 @@
             </section>
 
             <section id="justification">
-                <h2>6.2% 요구는 ‘과욕’이 아니라 ‘정상화’입니다!</h2>
+                <h2>우리의 6.2% 요구는 ‘과욕’이 아니라 ‘정상화’입니다!</h2>
                 <div class="justification-grid">
                     <div class="justification-card">
                         <h3>실질임금 보전</h3>
@@ -264,6 +305,30 @@
     </div>
 
     <script>
+        // 글씨 크기 조절 스크립트
+        document.addEventListener('DOMContentLoaded', () => {
+            const increaseBtn = document.getElementById('font-increase');
+            const decreaseBtn = document.getElementById('font-decrease');
+            const content = document.getElementById('main-content');
+
+            // 최소/최대 글씨 크기 (px 단위)
+            const MIN_FONT_SIZE = 14;
+            const MAX_FONT_SIZE = 22;
+
+            function changeFontSize(amount) {
+                // 현재 body의 글씨 크기를 기준으로 계산
+                let currentSize = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'));
+                let newSize = currentSize + amount;
+
+                if (newSize >= MIN_FONT_SIZE && newSize <= MAX_FONT_SIZE) {
+                    document.body.style.fontSize = newSize + 'px';
+                }
+            }
+
+            increaseBtn.addEventListener('click', () => changeFontSize(1));
+            decreaseBtn.addEventListener('click', () => changeFontSize(-1));
+        });
+
         // 차트 데이터 정의
         const years = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
         const dnfRates = [2.0, 2.0, 2.0, 1.5, 2.2, 3.0, 1.0, 1.0];
