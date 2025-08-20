@@ -242,19 +242,21 @@
             .justification-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
-        /* 인쇄 전용 스타일 */
+        /* --- 인쇄 전용 스타일 --- */
         @media print {
             /* 인쇄 시 불필요한 요소 숨기기 */
-            header, footer, .controls {
+            .controls {
                 display: none;
             }
 
+            /* 인쇄용 기본 텍스트 및 배경 설정 */
             body {
-                font-size: 12pt; /* A4 인쇄에 적합한 폰트 크기 */
+                font-size: 12pt;
                 background-color: #fff;
                 color: #000;
             }
 
+            /* 컨테이너 스타일 초기화 */
             .container {
                 box-shadow: none;
                 margin: 0;
@@ -264,25 +266,64 @@
             }
             
             main {
+                padding: 20px; /* 인쇄 여백 추가 */
+            }
+
+            /* 헤더를 텍스트만 보이도록 수정 */
+            header {
+                background: none !important;
+                color: #000 !important;
+                text-align: left;
+                border-bottom: 2px solid #000;
+                padding: 20px;
+            }
+            .flyer-title {
+                background: none !important;
+                color: #000 !important;
                 padding: 0;
+                font-size: 1.2em;
+                font-weight: bold;
+                display: block;
+                margin-bottom: 10px;
+                border: none;
+            }
+            header h1 {
+                color: #000 !important;
+                font-size: 2em;
+            }
+            header p.subtitle {
+                color: #000 !important;
+                font-size: 1.2em;
+            }
+
+            /* 그래프 영역 숨기기 */
+            .chart-container {
+                display: none;
+            }
+
+            /* 푸터를 텍스트만 보이도록 수정 */
+            footer {
+                display: flex;
+                background: none !important;
+                color: #000 !important;
+                text-align: center;
+                border-top: 1px solid #000;
+                padding-top: 10px;
+                justify-content: center;
+            }
+            .footer-logo {
+                display: none; /* 로고 이미지 숨기기 */
             }
 
             section {
                 margin-bottom: 20px;
+                page-break-inside: avoid; /* 섹션이 페이지 중간에 잘리지 않도록 함 */
             }
 
             .evidence-card, .claim, .truth li, .justification-card {
                 background-color: #fff !important;
                 border: 1px solid #ccc;
-            }
-
-            .chart-container {
-                page-break-inside: avoid; /* 차트가 페이지 중간에 잘리지 않도록 함 */
-            }
-
-            /* 2페이지로 나누기 위한 페이지 나눔 지점 */
-            #evidence .evidence-card:nth-of-type(2) {
-                page-break-after: always;
+                page-break-inside: avoid;
             }
 
             .call-to-action {
