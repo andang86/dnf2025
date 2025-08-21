@@ -150,11 +150,10 @@
             color: var(--main-red);
         }
         
-        /* --- [수정된 부분] 차트 컨테이너 스타일 --- */
         .chart-container {
-            position: relative; /* 차트의 기준점 역할을 하도록 설정 */
+            position: relative;
             width: 100%;
-            height: 300px; /* 모바일에서 적절한 높이 확보 */
+            height: 300px;
             margin: 20px auto;
         }
 
@@ -206,18 +205,10 @@
         }
 
         footer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
             text-align: center;
             padding: 20px;
             background-color: var(--dark-gray);
             color: #fff;
-        }
-        .footer-logo {
-            height: 40px;
-            width: auto;
         }
         footer p { 
             margin: 0; 
@@ -229,7 +220,6 @@
             header h1 { font-size: 3.2em; }
             main { padding: 40px; }
             .justification-grid { grid-template-columns: repeat(3, 1fr); }
-            /* PC에서는 차트 높이를 좀 더 키움 */
             .chart-container {
                 height: 400px;
             }
@@ -332,7 +322,6 @@
         </main>
 
         <footer>
-            <img src="https://i.imgur.com/2YqfW2H.png" alt="화섬식품노조 로고" class="footer-logo">
             <p>전국화학섬유식품산업노동조합 솔브레인디엔에프지회</p>
         </footer>
     </div>
@@ -392,7 +381,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false, // --- [수정된 부분] 가로세로 비율 유지 안 함 ---
+                    maintainAspectRatio: false,
                     plugins: {
                         title: { display: true, text: 'DNF vs 제조업 평균 임금 인상률 추이', font: { size: 16, weight: 'bold' } },
                         tooltip: { mode: 'index', intersect: false },
@@ -441,7 +430,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false, // --- [수정된 부분] 가로세로 비율 유지 안 함 ---
+                    maintainAspectRatio: false,
                     plugins: {
                         title: { display: true, text: 'DNF 실질임금상승률 추이 (명목임금 - 물가)', font: { size: 16, weight: 'bold' } },
                         tooltip: { mode: 'index', intersect: false },
